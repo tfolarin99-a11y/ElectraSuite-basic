@@ -145,6 +145,27 @@
     .bchip{padding:5px 11px;border-radius:6px;font-size:12px;font-weight:600;background:#f1f5f9;color:var(--cm)}
     .bchip.selected{background:var(--cp);color:#fff}
 
+    /* BUSINESS FOOTER */
+    .biz-footer{text-align:center;padding:28px 16px 16px;font-size:11px;color:var(--cm);border-top:1px solid var(--cbr);margin-top:20px}
+    .biz-footer strong{color:var(--cp);font-size:12px}
+
+    /* GUIDE PAGE */
+    .guide-hero{background:linear-gradient(135deg,var(--cp),#2d5a8e);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center}
+    .guide-hero h2{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;margin-bottom:6px}
+    .guide-hero p{font-size:13px;opacity:.8;line-height:1.6}
+    .guide-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:20px}
+    .guide-step{background:var(--csf);border:1px solid var(--cbr);border-radius:12px;padding:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .guide-step::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ca)}
+    .guide-step .gs-num{width:28px;height:28px;background:var(--cp);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:'Space Mono',monospace;margin-bottom:10px}
+    .guide-step h3{font-size:13px;font-weight:700;color:var(--cp);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+    .guide-step p{font-size:12px;color:var(--cm);line-height:1.6}
+    .guide-step .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:7px 10px;font-size:11px;color:#92400e;margin-top:8px;line-height:1.5}
+    .guide-tip-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:16px;margin-bottom:14px}
+    .guide-tip-box h3{font-size:12px;font-weight:700;color:var(--cs);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+    .guide-tip-box ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+    .guide-tip-box li{font-size:12px;color:#166534;display:flex;align-items:flex-start;gap:7px;line-height:1.5}
+    .guide-tip-box li::before{content:'✓';font-weight:700;flex-shrink:0;margin-top:1px}
+
     /* PRINT */
     @media print{
       .nav,.tab-bar,.nav-btns,.no-print{display:none!important}
@@ -174,7 +195,7 @@
   <div class="nav-left">
     <div class="nav-logo">⚡</div>
     <div>
-      <div class="nav-title">Electrical Load Calculator <span>IEC-Grade Professional Tool</span></div>
+      <div class="nav-title">Electrical Load Calculator <span>Taewoo Digital Techniques LLC</span></div>
     </div>
     <span class="edition-pill">Basic Edition</span>
   </div>
@@ -194,6 +215,7 @@
     <button class="tb" onclick="T(4);calcCable()">〰 Cables</button>
     <button class="tb" onclick="T(5);calcBreaker()">🔌 Breakers</button>
     <button class="tb" onclick="T(6);genReport()">📄 Report</button>
+    <button class="tb" onclick="T(7)">📖 Guide</button>
   </div>
 
   <!-- ═══ P0 PROJECT ═══ -->
@@ -446,7 +468,88 @@
     <div id="reportOutput"></div>
   </div>
 
+  <!-- ═══ P7 GUIDE ═══ -->
+  <div class="panel" id="p7">
+    <div class="guide-hero">
+      <div style="font-size:36px;margin-bottom:10px">⚡</div>
+      <h2>How to Use This Tool</h2>
+      <p>A step-by-step guide for electrical technicians, engineers and contractors.<br>Follow the tabs from left to right for a complete calculation workflow.</p>
+      <div style="margin-top:12px;font-size:11px;opacity:.6">Taewoo Digital Techniques LLC — Basic Edition</div>
+    </div>
+
+    <div class="guide-steps">
+      <div class="guide-step">
+        <div class="gs-num">1</div>
+        <h3>📋 Project Tab</h3>
+        <p>Start here every time. Fill in the project name, client, location, and engineer name. These details appear on your final report. Set your supply voltage (e.g. 415V for three-phase Nigeria), frequency (50Hz), and default power factor (0.8 is standard).</p>
+        <div class="tip">💡 Tip: Setting the right voltage here affects ALL calculations throughout the tool automatically.</div>
+      </div>
+      <div class="guide-step">
+        <div class="gs-num">2</div>
+        <h3>📝 Loads Tab</h3>
+        <p>Enter every electrical load in the building. Use a preset (e.g. "Office Floor") to get started quickly, then add or remove rows to match your actual loads. For each load enter: description, category, quantity, unit wattage, power factor, and demand factor.</p>
+        <div class="tip">💡 Tip: Demand Factor is how often a load runs at full power. Lighting = 1.0. Sockets = 0.4. HVAC = 0.8–0.9.</div>
+      </div>
+      <div class="guide-step">
+        <div class="gs-num">3</div>
+        <h3>📊 Demand Tab</h3>
+        <p>Select your building type to apply the correct demand factor, or enter a custom value. The tool calculates your Connected Load, Demand Load, kW, kVA and a Design kVA with a growth margin (default 20%) already added.</p>
+        <div class="tip">💡 Tip: Always use the <strong>Design kVA</strong> figure (with growth margin) when sizing your main equipment.</div>
+      </div>
+      <div class="guide-step">
+        <div class="gs-num">4</div>
+        <h3>⚡ Current Tab</h3>
+        <p>Click <strong>"Import kW from Demand"</strong> to pull in your demand figure automatically. The tool calculates your line current using the correct formula for your system (3-phase or single-phase). A 125% design factor is applied to give you the safe sizing current.</p>
+        <div class="tip">💡 Tip: Always use <strong>Design Current (×1.25)</strong> — not the line current — when sizing cables and breakers.</div>
+      </div>
+      <div class="guide-step">
+        <div class="gs-num">5</div>
+        <h3>〰 Cables Tab</h3>
+        <p>Click <strong>"Import Design Current"</strong> to auto-fill from the Current tab. Select your cable material (copper/aluminium), insulation (XLPE/PVC), and how the cable will be installed (conduit, tray, clipped etc.). The tool recommends the correct IEC cable size with full derating applied.</p>
+        <div class="tip">💡 Tip: Ambient temperature and number of grouped circuits both reduce cable capacity — the tool handles this automatically.</div>
+      </div>
+      <div class="guide-step">
+        <div class="gs-num">6</div>
+        <h3>🔌 Breakers Tab</h3>
+        <p>Click <strong>"Import from Current Module"</strong> to fill in the full load current. Select the load type — motor and continuous loads require a 125% rating rule. The tool recommends the correct MCB, MCCB or ACB from standard IEC ratings.</p>
+        <div class="tip">💡 Tip: For motor loads, always select "Motor Load" type and add a DOL or Star-Delta starter in your panel design.</div>
+      </div>
+      <div class="guide-step">
+        <div class="gs-num">7</div>
+        <h3>📄 Report Tab</h3>
+        <p>Click <strong>"Generate Report"</strong> to produce a full professional summary of your project. Then click <strong>"Print / Save PDF"</strong> and choose "Save as PDF" in your browser. The report includes your project details, full load schedule, and all equipment recommendations.</p>
+        <div class="tip">💡 Tip: In the print dialog, enable <strong>"Background graphics"</strong> for the best-looking PDF output.</div>
+      </div>
+    </div>
+
+    <div class="guide-tip-box">
+      <h3>✅ Recommended Workflow</h3>
+      <ul>
+        <li>Always start at the Project tab and set your system voltage correctly</li>
+        <li>Use the load presets as a starting point, then customise for your project</li>
+        <li>Work through the tabs from left to right — each tab feeds into the next</li>
+        <li>Use the <strong>"Import"</strong> buttons to carry results between modules automatically</li>
+        <li>Always use the 125% Design Current for cable and breaker sizing, not the raw line current</li>
+        <li>Generate and save your report as a PDF before closing the browser</li>
+        <li>For official project submissions, have the report reviewed and stamped by a registered engineer</li>
+      </ul>
+    </div>
+
+    <div class="card" style="text-align:center;padding:24px">
+      <div style="font-size:28px;margin-bottom:10px">⚡</div>
+      <div style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:var(--cp);margin-bottom:4px">Taewoo Digital Techniques LLC</div>
+      <div style="font-size:12px;color:var(--cm)">Professional Electrical Engineering Tools</div>
+      <div style="margin-top:14px;font-size:11px;color:var(--cm)">Basic Edition — IEC-Grade Electrical Load Calculator</div>
+      <div style="font-size:11px;color:var(--cm);margin-top:3px">All calculations follow IEC 60364 principles. Results are engineering estimates — verify against site conditions.</div>
+    </div>
+  </div>
+
 </div><!-- end .app -->
+
+<div class="biz-footer">
+  <strong>Taewoo Digital Techniques LLC</strong> — Professional Electrical Engineering Tools<br>
+  Basic Edition &nbsp;|&nbsp; IEC-Grade Electrical Load Calculator &nbsp;|&nbsp; All results are engineering estimates
+</div>
 
 <script>
 // ── SUPABASE AUTH ──
