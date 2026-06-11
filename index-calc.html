@@ -1,0 +1,217 @@
+<div class="app">
+<div class="hdr">
+  <div class="hdr-logo">⚡</div>
+  <div>
+    <h1>ElectraSuite <span class="hdr-badge">Basic</span></h1>
+    <p>4-Module IEC-Grade Tool — Electrical design & load analysis</p>
+  </div>
+</div>
+
+<!-- UPGRADE MODAL -->
+<div id="upgradeModal" class="upgrade-overlay" style="display:none" onclick="closeUpgradeModal(event)">
+  <div class="upgrade-modal" role="dialog" aria-modal="true" aria-labelledby="upgradeTitle">
+    <div class="upgrade-header">
+      <div class="upgrade-lock-icon">🔒</div>
+      <h2 id="upgradeTitle">Premium Feature</h2>
+    </div>
+    <div class="upgrade-body">
+      <p>This feature is not available in <strong>ElectraSuite Basic</strong>. Upgrade to <strong>ElectraSuite Standard</strong> or <strong>ElectraSuite Pro</strong> to unlock additional engineering calculations, sizing tools, and reporting capabilities.</p>
+      <div class="upgrade-features">
+        <div class="upgrade-tier">
+          <div class="tier-name standard">Standard</div>
+          <ul>
+            <li>✓ Cable Selection</li>
+            <li>✓ Voltage Drop</li>
+            <li>✓ Breaker Sizing</li>
+            <li>✓ Generator Sizing</li>
+            <li>✓ Inverter Sizing</li>
+            <li>✓ Transformer Sizing</li>
+          </ul>
+        </div>
+        <div class="upgrade-tier">
+          <div class="tier-name pro">Pro</div>
+          <ul>
+            <li>✓ Everything in Standard</li>
+            <li>✓ Report Generation</li>
+            <li>✓ Bill of Materials</li>
+            <li>✓ Phase Balancing</li>
+            <li>✓ Carbon Footprint</li>
+            <li>✓ Utility Cost</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="upgrade-actions">
+      <button class="upgrade-btn-primary" onclick="handleUpgradeNow()">Upgrade Now</button>
+      <button class="upgrade-btn-secondary" onclick="closeUpgradeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="tabs-wrap">
+<div class="tabs" id="tabsBar">
+  <div class="tab active" onclick="accessTab(0, 'projects')">📋 Project ID</div>
+  <div class="tab" onclick="accessTab(1, 'load')">📝 Loads</div>
+  <div class="tab" onclick="accessTab(2, 'demand')">📊 Demand</div>
+  <div class="tab" onclick="accessTab(3, 'current')">⚡ Current</div>
+  <div class="tab tab-locked" onclick="accessTab(4, 'cable')" title="Upgrade to Standard or Pro">〰 Cable Selection <span class="tab-lock-icon">🔒</span></div>
+  <div class="tab tab-locked" onclick="accessTab(5, 'voltdrop')" title="Upgrade to Standard or Pro">📉 Volt Drop <span class="tab-lock-icon">🔒</span></div>
+  <div class="tab tab-locked" onclick="accessTab(6, 'breaker')" title="Upgrade to Standard or Pro">🔌 Breaker <span class="tab-lock-icon">🔒</span></div>
+  <div class="tab tab-locked" onclick="accessTab(7, 'generator')" title="Upgrade to Standard or Pro">🔋 Generator <span class="tab-lock-icon">🔒</span></div>
+  <div class="tab tab-locked" onclick="accessTab(8, 'inverter')" title="Upgrade to Standard or Pro">🔆 Inverter <span class="tab-lock-icon">🔒</span></div>
+  <div class="tab tab-locked" onclick="accessTab(9, 'transformer')" title="Upgrade to Standard or Pro">🔄 Transformer <span class="tab-lock-icon">🔒</span></div>
+  <div class="tab tab-locked" onclick="accessTab(10, 'bom')" title="Upgrade to Standard or Pro">📦 BOM <span class="tab-lock-icon">🔒</span></div>
+  <div class="tab tab-locked" onclick="accessTab(11, 'phasebal')" title="Upgrade to Standard or Pro">⚖ Phase Bal. <span class="tab-lock-icon">🔒</span></div>
+  <div class="tab tab-locked" onclick="accessTab(12, 'carbon')" title="Upgrade to Standard or Pro">🌍 Carbon Footprint <span class="tab-lock-icon">🔒</span></div>
+  <div class="tab tab-locked" onclick="accessTab(13, 'utility')" title="Upgrade to Standard or Pro">💰 Utility Cost <span class="tab-lock-icon">🔒</span></div>
+  <div class="tab tab-locked" onclick="accessTab(14, 'report')" title="Upgrade to Standard or Pro">📄 Report <span class="tab-lock-icon">🔒</span></div>
+</div>
+<div class="tabs-scroll-hint tabs-scroll-hint-left" id="tabsScrollHintLeft">scroll ‹‹</div>
+<div class="tabs-scroll-hint tabs-scroll-hint-right" id="tabsScrollHintRight">›› scroll</div>
+</div>
+
+<!-- P0 PROJECT -->
+<div class="panel active" id="p0">
+  <div class="sec"><div class="st">📋 Project Details</div>
+    <div class="g2">
+      <div class="fld"><label>Project Name</label><input id="pn" value="Riverside Office Complex"></div>
+      <div class="fld"><label>Client / Owner</label><input id="pc" value="Apex Properties Ltd"></div>
+      <div class="fld"><label>Location</label><input id="pl" value="Lagos, Nigeria"></div>
+      <div class="fld"><label>Author</label><input id="pe" placeholder="Your name"></div>
+      <div class="fld"><label>Date</label><input type="date" id="pd"></div>
+      <div class="fld"><label>Project Type</label><select id="pt"><option>Commercial</option><option>Residential</option><option>Industrial (Light)</option><option>Hotel</option><option>Hospital</option><option>School</option><option>Warehouse</option><option>Mall</option></select></div>
+    </div>
+  </div>
+  <div class="sec"><div class="st">⚙ System Configuration</div>
+    <div class="g3">
+      <div class="fld"><label>System Type</label><select id="stype" onchange="uCC()"><option value="3ph">Three Phase</option><option value="1ph">Single Phase</option></select></div>
+      <div class="fld"><label>Supply Voltage</label><select id="svolt" onchange="uCC()"><option value="415">415V (3Φ)</option><option value="400">400V (3Φ)</option><option value="230">230V (1Φ)</option><option value="240">240V (1Φ)</option><option value="120">120V (1Φ)</option><option value="custom">Custom</option></select></div>
+      <div class="fld"><label>Custom Voltage (V)</label><input type="number" id="scvolt" value="415" oninput="uCC()"></div>
+      <div class="fld"><label>Frequency</label><select id="sfreq"><option value="50">50 Hz</option><option value="60">60 Hz</option></select></div>
+      <div class="fld"><label>Default Power Factor</label><input type="number" id="spf" value="0.8" min="0.5" max="1" step="0.01"></div>
+      <div class="fld"><label>Earthing System</label><select id="searth"><option>TN-S</option><option>TN-C-S</option><option>TT</option><option>IT</option></select></div>
+    </div>
+    <div class="al ai" style="margin-top:10px">ℹ All modules use these settings as defaults.</div>
+  </div>
+  <div class="nvr"><div></div><button class="nb" onclick="accessTab(1,'load')">Next: Loads →</button></div>
+</div>
+
+<!-- P1 LOADS -->
+<div class="panel" id="p1">
+  <div class="sec"><div class="st">📋 Quick Presets</div>
+    <div class="pbs">
+      <button class="pb" onclick="LP('house',this)">🏠 Residential</button>
+      <button class="pb" onclick="LP('office',this)">🏢 Office Floor</button>
+      <button class="pb" onclick="LP('school',this)">🏫 School Block</button>
+      <button class="pb" onclick="LP('hotel',this)">🏨 Hotel Block</button>
+      <button class="pb" onclick="LP('warehouse',this)">🏭 Warehouse</button>
+    </div>
+  </div>
+  <div class="sec"><div class="st">📝 Load Schedule</div>
+    <div class="lr lrh"><span>Description</span><span>Category</span><span>Qty</span><span>Watts</span><span>Total</span><span>PWR Factor</span><span>Demand</span><span>Phase</span><span></span></div>
+    <div id="loadRows"></div>
+    <div style="margin-top:8px;display:flex;gap:7px">
+      <button class="btn bp bsm" onclick="AL()">+ Add Load</button>
+      <button class="btn bsm" style="border:1px solid var(--cbr)" onclick="CL()">🗑 Clear All</button>
+    </div>
+    <div class="tb2"><span>Total Connected Load</span><span class="big" id="totConn">0 W</span></div>
+  </div>
+  <div class="nvr"><button class="nb" onclick="accessTab(0,'projects')">← Back</button><button class="nb" onclick="accessTab(2,'demand');cD()">Next: Demand →</button></div>
+</div>
+
+<!-- P2 DEMAND -->
+<div class="panel" id="p2">
+  <div class="sec"><div class="st">📊 Demand Factor Presets</div>
+    <div class="pbs" id="dPresets">
+      <button class="pb" onclick="sDP(0.70,this)">Residential</button>
+      <button class="pb active" onclick="sDP(0.75,this)">Office</button>
+      <button class="pb" onclick="sDP(0.65,this)">Hotel</button>
+      <button class="pb" onclick="sDP(0.80,this)">Hospital</button>
+      <button class="pb" onclick="sDP(0.60,this)">School</button>
+      <button class="pb" onclick="sDP(0.50,this)">Warehouse</button>
+      <button class="pb" onclick="sDP(0.85,this)">Mall/Retail</button>
+    </div>
+    <div class="g3">
+      <div class="fld"><label>Demand Factor</label><input type="number" id="df" value="0.75" min="0.1" max="1" step="0.01" oninput="cD()"></div>
+      <div class="fld"><label>Diversity Factor</label><input type="number" id="divf" value="1.0" min="0.5" max="2" step="0.01" oninput="cD()"></div>
+      <div class="fld"><label>Growth Margin (%)</label><input type="number" id="gm" value="20" min="0" max="100" oninput="cD()"></div>
+    </div>
+  </div>
+  <div class="sec"><div class="st">📈 Results</div>
+    <div class="fb">Demand Load = Connected Load × Demand Factor ÷ Diversity Factor</div>
+    <div class="mgs">
+      <div class="mg"><div class="v" id="d_c">0</div><div class="u">W</div><div class="l">Connected</div></div>
+      <div class="mg"><div class="v" id="d_d">0</div><div class="u">W</div><div class="l">Demand</div></div>
+      <div class="mg"><div class="v" id="d_kw">0</div><div class="u">kW</div><div class="l">Demand kW</div></div>
+      <div class="mg"><div class="v" id="d_kva">0</div><div class="u">kVA</div><div class="l">Apparent kVA</div></div>
+      <div class="mg"><div class="v" id="d_kvar">0</div><div class="u">kVAR</div><div class="l">Reactive</div></div>
+      <div class="mg"><div class="v" id="d_des">0</div><div class="u">kVA</div><div class="l">Design +Margin</div></div>
+    </div>
+    <div id="dAlert"></div>
+    <div style="margin-top:10px"><div style="font-size:11px;font-weight:700;color:var(--cm);text-transform:uppercase;margin-bottom:5px">Load by Phase</div><div id="pBar"></div></div>
+  </div>
+  <div class="nvr"><button class="nb" onclick="accessTab(1,'load')">← Back</button><button class="nb" onclick="accessTab(3,'current');uCC()">Next: Current →</button></div>
+</div>
+
+<!-- P3 CURRENT -->
+<div class="panel" id="p3">
+  <div class="sec"><div class="st">⚡ Current Calculation</div>
+    <button class="btn ba bsm" style="margin-bottom:10px" onclick="impDem2Cur()">⬇ Import from Demand</button>
+    <div class="g3">
+      <div class="fld"><label>Power (kW)</label><input type="number" id="ckw" value="0" step="0.1" oninput="cCur()"></div>
+      <div class="fld"><label>Power Factor</label><input type="number" id="cpf" value="0.8" step="0.01" min="0.1" max="1" oninput="cCur()"></div>
+      <div class="fld"><label>Efficiency (%)</label><input type="number" id="ceff" value="100" step="1" oninput="cCur()"></div>
+    </div>
+    <div class="fb" id="cFormula">3Φ: I = P ÷ (√3 × V × PF)</div>
+  </div>
+  <div class="sec"><div class="st">📋 Results</div>
+    <div class="mgs">
+      <div class="mg"><div class="v" id="c_line">0</div><div class="u">A</div><div class="l">Line Current</div></div>
+      <div class="mg"><div class="v" id="c_phase">0</div><div class="u">A</div><div class="l">Phase Current</div></div>
+      <div class="mg"><div class="v" id="c_kva">0</div><div class="u">kVA</div><div class="l">Apparent Power</div></div>
+      <div class="mg"><div class="v" id="c_des">0</div><div class="u">A</div><div class="l">Design ×1.25</div></div>
+    </div>
+    <div class="al ai">ℹ 125% rule applied. Use Design Current for cable and breaker sizing.</div>
+    <div class="upgrade-teaser">
+      <div class="ut-icon">🔒</div>
+      <div class="ut-text">
+        <strong>Continue your analysis with Standard or Pro</strong>
+        <span>Use your Design Current in Cable Selection, Voltage Drop, Breaker Sizing, and more.</span>
+      </div>
+      <button class="ut-btn" onclick="showUpgradeModal()">Upgrade</button>
+    </div>
+  </div>
+  <div class="nvr"><button class="nb" onclick="accessTab(2,'demand')">← Back</button><button class="nb tab-locked-nav" onclick="accessTab(4,'cable')">Next: Cable 🔒 →</button></div>
+</div>
+
+<!-- P4–P14: LOCKED PANELS (content blocked server-side by access control) -->
+<div class="panel" id="p4"></div>
+<div class="panel" id="p5"></div>
+<div class="panel" id="p6"></div>
+<div class="panel" id="p7"></div>
+<div class="panel" id="p8"></div>
+<div class="panel" id="p9"></div>
+<div class="panel" id="p10"></div>
+<div class="panel" id="p11"></div>
+<div class="panel" id="p12"></div>
+<div class="panel" id="p13"></div>
+<div class="panel" id="p14"></div>
+
+</div>
+<script>
+(function(){
+  var bar=document.getElementById('tabsBar');
+  var hintR=document.getElementById('tabsScrollHintRight');
+  var hintL=document.getElementById('tabsScrollHintLeft');
+  function upd(){
+    if(!bar)return;
+    var atEnd=bar.scrollLeft+bar.clientWidth>=bar.scrollWidth-4;
+    var atStart=bar.scrollLeft<=4;
+    if(hintR)hintR.style.opacity=atEnd?'0':'1';
+    if(hintL)hintL.style.opacity=atStart?'0':'1';
+  }
+  if(bar){bar.addEventListener('scroll',upd,{passive:true});}
+  window.addEventListener('resize',upd);
+  setTimeout(upd,200);
+})();
+</script>
