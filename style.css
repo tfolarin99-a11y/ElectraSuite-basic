@@ -274,7 +274,21 @@ tr:hover td{background:#f8fafc}
   display:flex;
   gap:10px;
   border-top:1px solid var(--cbr);
+  flex-wrap:wrap;
 }
+.upgrade-btn-standard{
+  flex:1;
+  padding:10px 20px;
+  background:#16a34a;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:background .15s;
+}
+.upgrade-btn-standard:hover{background:#15803d}
 .upgrade-btn-primary{
   flex:1;
   padding:10px 20px;
